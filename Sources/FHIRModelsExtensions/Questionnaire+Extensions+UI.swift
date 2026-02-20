@@ -6,13 +6,12 @@
 // SPDX-License-Identifier: MIT
 //
 
-import ModelsR4
-
 #if canImport(UIKit)
+
+public import ModelsR4
 public import enum UIKit.UIKeyboardType
 public import enum UIKit.UITextAutocapitalizationType
 public import struct UIKit.UITextContentType
-#endif
 
 
 extension QuestionnaireItem {
@@ -169,3 +168,5 @@ extension QuestionnaireItem {
     }
 #endif
 }
+
+#endif
