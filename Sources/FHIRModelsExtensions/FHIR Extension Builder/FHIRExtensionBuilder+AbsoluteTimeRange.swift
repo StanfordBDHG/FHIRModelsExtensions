@@ -7,7 +7,6 @@
 //
 
 import Foundation
-public import HealthKit
 public import ModelsR4
 
 
@@ -25,26 +24,6 @@ extension FHIRExtensionUrls {
     /// Url of a FHIR Extension containing, if applicable, the absolute end date timestamp of a FHIR `Observation`.
     nonisolated(unsafe) public static let absoluteTimeRangeEnd = "https://bdh.stanford.edu/fhir/defs/absoluteTimeRangeEnd".asFHIRURIPrimitive()!
     // swiftlint:disable:previous force_unwrapping
-}
-
-
-extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKSample> {
-    /// A FHIR Extension Builder that writes the absolute time range (i.e., start and end date) of a HealthKit sample into a FHIR `Observation` created from the sample.
-    public static var includeAbsoluteTimeRange: FHIRExtensionBuilder<HKSample> {
-        .init { (sample: HKSample, observation) in
-            let timeRangeExtensions = [
-                Extension(
-                    url: FHIRExtensionUrls.absoluteTimeRangeStart,
-                    value: .decimal(sample.startDate.timeIntervalSince1970.asFHIRDecimalPrimitive())
-                ),
-                Extension(
-                    url: FHIRExtensionUrls.absoluteTimeRangeEnd,
-                    value: .decimal(sample.endDate.timeIntervalSince1970.asFHIRDecimalPrimitive())
-                )
-            ]
-            observation.appendExtensions(timeRangeExtensions, replaceAllExistingWithSameUrl: true)
-        }
-    }
 }
 
 
