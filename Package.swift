@@ -1,7 +1,7 @@
 // swift-tools-version:6.0
 
 //
-// This source file is part of the TemplatePackage open source project
+// This source file is part of the Stanford Spezi open source project
 // 
 // SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
 // 
@@ -13,7 +13,7 @@ import PackageDescription
 
 
 let package = Package(
-    name: "TemplatePackage",
+    name: "FHIRModelsExtensions",
     platforms: [
         .iOS(.v17),
         .watchOS(.v10),
@@ -23,19 +23,19 @@ let package = Package(
         .macCatalyst(.v17)
     ],
     products: [
-        .library(name: "TemplatePackage", targets: ["TemplatePackage"])
+        .library(name: "FHIRModelsExtensions", targets: ["FHIRModelsExtensions"])
     ],
     dependencies: [
     ] + swiftLintPackage(),
     targets: [
         .target(
-            name: "TemplatePackage",
+            name: "FHIRModelsExtensions",
             plugins: [] + swiftLintPlugin()
         ),
         .testTarget(
-            name: "TemplatePackageTests",
+            name: "FHIRModelsExtensionsTests",
             dependencies: [
-                .target(name: "TemplatePackage")
+                .target(name: "FHIRModelsExtensions")
             ],
             plugins: [] + swiftLintPlugin()
         )
