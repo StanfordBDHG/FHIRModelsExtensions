@@ -4,20 +4,27 @@
 
 This source file is part of the Stanford Spezi open source project
 
-SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
+SPDX-FileCopyrightText: 2026 Stanford University and the project authors (see CONTRIBUTORS.md)
 
 SPDX-License-Identifier: MIT
        
 -->
 
-The template repository contains a template Swift Package, including a continuous integration setup.
+Reusable utilies when working with the [apple/FHIRModels](https://github.com/apple/FHIRModels) package.
 
-## Overview
+> Note: The name here might be a bit misleading; this package both extends the FHIR types, and also provides facilitis for working with [FHIR Extensions](https://build.fhir.org/extensibility.html).
 
-Please follow the steps in the README.md file to customize the code to your needs.
 
-## Types
+## Topics
 
-### Template Package
+### FHIR Extension Builder
+- ``FHIRExtensionBuilder``
 
-- ``FHIRModelsExtensions``
+### FHIRModels Utilities
+- ``ModelsR4``
+- ``FHIRTypeWithExtensions``
+
+### Foundation Utilities
+- ``Foundation/Decimal/intValue``
+- ``Foundation/Decimal/doubleValue``
+- ``Foundation/Decimal/asFHIRPrimitive()``

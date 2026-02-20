@@ -57,21 +57,7 @@ let package = Package(
             dependencies: [
                 .product(name: "ModelsR4", package: "FHIRModels")
             ],
-            resources: [
-                .copy("Resources/SkipLogicExample.json"),
-                .copy("Resources/TextValidationExample.json"),
-                .copy("Resources/ContainedValueSetExample.json"),
-                .copy("Resources/NumberExample.json"),
-                .copy("Resources/DateTimeExample.json"),
-                .copy("Resources/PHQ-9.json"),
-                .copy("Resources/GAD-7.json"),
-                .copy("Resources/GCS.json"),
-                .copy("Resources/IPSS.json"),
-                .copy("Resources/FormExample.json"),
-                .copy("Resources/MultipleEnableWhen.json"),
-                .copy("Resources/ImageCapture.json"),
-                .copy("Resources/SliderExample.json")
-            ]
+            resources: [.process("Resources")]
         ),
         .testTarget(
             name: "FHIRModelsExtensionsTests",
