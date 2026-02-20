@@ -11,17 +11,23 @@ public import ModelsR4
 
 
 extension Decimal {
-    public var doubleValue: Double {
+    /// Converts the `Decimal` into a `Double`
+    @inlinable public var doubleValue: Double {
         NSDecimalNumber(decimal: self).doubleValue
     }
     
-    public var intValue: Int {
+    /// Converts the `Decimal` into an `Int`, possibly rounding if necessary
+    @inlinable public var intValue: Int {
         NSDecimalNumber(decimal: self).intValue
     }
 }
 
 
 extension FHIRDate {
+    /// Creates a `DateComponents` instance with the `year`, `month`, and `day` components populated.
+    ///
+    /// - parameter fallback: The value that should be used for the `month` and `day` components, if the `FHIRDate` is missing the component.
+    @inlinable
     public func dateComponents(missingComponentFallback fallback: Int? = 1) -> DateComponents {
         DateComponents(
             year: self.year,
@@ -33,6 +39,10 @@ extension FHIRDate {
 
 
 extension FHIRTime {
+    /// Creates a `DateComponents` instance with the `hour`, `minute`, and `second` components populated.
+    ///
+    /// - Note: The `FHIRTime`'s `second` value will be rounded if necessary.
+    @inlinable
     public func dateComponents() -> DateComponents {
         DateComponents(
             hour: Int(self.hour),
@@ -44,6 +54,10 @@ extension FHIRTime {
 
 
 extension DateTime {
+    /// Creates a `DateComponents` instance with the `timeZone`, `year`, `month`, `day`, `hour`, `minute`, and `second` components populated.
+    ///
+    /// - parameter dateFallback: The value that should be used for the `month` and `day` components, if the `FHIRDate` is missing the component.
+    @inlinable
     public func dateComponents(missingDateComponentFallback dateFallback: Int? = 1) -> DateComponents {
         var components = self.date.dateComponents(missingComponentFallback: dateFallback)
         if let timeComps = self.time?.dateComponents() {
@@ -107,4 +121,3 @@ extension QuestionnaireItemType {
         }
     }
 }
-

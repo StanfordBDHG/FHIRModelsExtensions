@@ -6,24 +6,19 @@
 // SPDX-License-Identifier: MIT
 //
 
-import OSLog
 import XCTest
 
 
 class TestAppUITests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
-        
         continueAfterFailure = false
     }
     
-
     @MainActor
     func testFHIRModelsExtensions() throws {
         let app = XCUIApplication()
         app.launch()
-        
-        XCTAssert(app.staticTexts["Stanford University"].waitForExistence(timeout: 0.1))
-        XCTAssert(app.staticTexts[operatingSystem].exists)
+        XCTAssert(app.staticTexts["Hello there"].waitForExistence(timeout: 0.1))
     }
 }

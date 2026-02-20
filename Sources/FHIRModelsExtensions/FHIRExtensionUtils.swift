@@ -10,6 +10,7 @@ public import ModelsR4
 
 
 extension ModelsR4.Extension.ValueX {
+    /// The value's string value, if applicable.
     public var stringValue: FHIRPrimitive<FHIRString>? {
         switch self {
         case .string(let value):

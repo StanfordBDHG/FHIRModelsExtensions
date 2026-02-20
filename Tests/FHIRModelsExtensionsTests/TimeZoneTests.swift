@@ -12,7 +12,7 @@ import Testing
 
 
 @MainActor // to work around https://github.com/apple/FHIRModels/issues/36
-struct TimeZoneTests { // swiftlint:disable:this type_body_length
+struct TimeZoneTests {
     /// Tests creating a `Period` instance using different time zones for start and end date.
     @Test
     func multiTimeZonePeriod() throws {

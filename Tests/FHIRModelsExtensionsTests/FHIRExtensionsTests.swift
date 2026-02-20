@@ -6,8 +6,8 @@
 // SPDX-License-Identifier: MIT
 //
 
-import Foundation
 @testable import FHIRModelsExtensions
+import Foundation
 import ModelsR4
 import Testing
 

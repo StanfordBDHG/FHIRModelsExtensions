@@ -7,15 +7,13 @@
 //
 
 import SwiftUI
-import FHIRModelsExtensions
 
 
 @main
 struct UITestsApp: App {
     var body: some Scene {
         WindowGroup {
-            Text(FHIRModelsExtensions().stanford)
-            Text(operatingSystem)
+            Text(verbatim: "Hello there")
         }
     }
 }
