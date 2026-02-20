@@ -7,6 +7,7 @@
 //
 
 @testable import FHIRModelsExtensions
+import Foundation
 import ModelsR4
 import Testing
 
