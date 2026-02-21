@@ -1,10 +1,10 @@
-// swift-tools-version:6.0
+// swift-tools-version:6.2
 
 //
-// This source file is part of the TemplatePackage open source project
+// This source file is part of the Stanford Spezi open source project
 // 
-// SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
-// 
+// SPDX-FileCopyrightText: 2026 Stanford University and the project authors (see CONTRIBUTORS.md)
+//
 // SPDX-License-Identifier: MIT
 //
 
@@ -13,7 +13,7 @@ import PackageDescription
 
 
 let package = Package(
-    name: "TemplatePackage",
+    name: "FHIRModelsExtensions",
     platforms: [
         .iOS(.v17),
         .watchOS(.v10),
@@ -23,39 +23,51 @@ let package = Package(
         .macCatalyst(.v17)
     ],
     products: [
-        .library(name: "TemplatePackage", targets: ["TemplatePackage"])
+        .library(name: "FHIRModelsExtensions", targets: ["FHIRModelsExtensions"]),
+        .library(name: "FHIRPathParser", targets: ["FHIRPathParser"]),
+        .library(name: "FHIRQuestionnaires", targets: ["FHIRQuestionnaires"])
     ],
     dependencies: [
-    ] + swiftLintPackage(),
+        .package(url: "https://github.com/apple/FHIRModels.git", from: "0.7.0"),
+        .package(url: "https://github.com/antlr/antlr4.git", from: "4.13.1")
+    ],
     targets: [
         .target(
-            name: "TemplatePackage",
-            plugins: [] + swiftLintPlugin()
+            name: "FHIRModelsExtensions",
+            dependencies: [
+                "FHIRPathParser",
+                .product(name: "ModelsR4", package: "FHIRModels")
+            ],
+            swiftSettings: [
+                .enableUpcomingFeature("ExistentialAny"),
+                .enableUpcomingFeature("InternalImportsByDefault")
+            ]
+        ),
+        .target(
+            name: "FHIRPathParser",
+            dependencies: [
+                .product(name: "Antlr4", package: "antlr4")
+            ],
+            exclude: [
+                "ANTLUtils"
+            ]
+        ),
+        .target(
+            name: "FHIRQuestionnaires",
+            dependencies: [
+                .product(name: "ModelsR4", package: "FHIRModels")
+            ],
+            resources: [.process("Resources")]
         ),
         .testTarget(
-            name: "TemplatePackageTests",
+            name: "FHIRModelsExtensionsTests",
             dependencies: [
-                .target(name: "TemplatePackage")
-            ],
-            plugins: [] + swiftLintPlugin()
+                "FHIRModelsExtensions", "FHIRQuestionnaires"
+            ]
+        ),
+        .testTarget(
+            name: "FHIRPathParserTests",
+            dependencies: ["FHIRPathParser"]
         )
     ]
 )
-
-
-func swiftLintPlugin() -> [Target.PluginUsage] {
-    // Fully quit Xcode and open again with `open --env SPEZI_DEVELOPMENT_SWIFTLINT /Applications/Xcode.app`
-    if ProcessInfo.processInfo.environment["SPEZI_DEVELOPMENT_SWIFTLINT"] != nil {
-        [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLint")]
-    } else {
-        []
-    }
-}
-
-func swiftLintPackage() -> [PackageDescription.Package.Dependency] {
-    if ProcessInfo.processInfo.environment["SPEZI_DEVELOPMENT_SWIFTLINT"] != nil {
-        [.package(url: "https://github.com/realm/SwiftLint.git", from: "0.55.1")]
-    } else {
-        []
-    }
-}

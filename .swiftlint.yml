@@ -1,5 +1,5 @@
 #
-# This source file is part of the TemplatePackage open source project
+# This source file is part of the Stanford Spezi open source project
 #
 # SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
 #
@@ -378,6 +378,7 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   - .build
   - .swiftpm
   - .derivedData
+  - Sources/FHIRPathParser/Generated
   - Tests/UITests/.derivedData
 
 closure_body_length: # Closure bodies should not span too many lines.
