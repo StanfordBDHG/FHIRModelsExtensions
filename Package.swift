@@ -13,7 +13,7 @@ import PackageDescription
 
 /// Whether the package should run SwiftLint as part of its build process.
 ///
-/// Set this to `false` before commiting any changes.
+/// Set this to `false` before committing any changes.
 let enableSwiftLintPlugin = false
 
 
