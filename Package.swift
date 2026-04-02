@@ -11,6 +11,11 @@
 import class Foundation.ProcessInfo
 import PackageDescription
 
+/// Whether the package should run SwiftLint as part of its build process.
+///
+/// Set this to `false` before committing any changes.
+let enableSwiftLintPlugin = false
+
 
 let package = Package(
     name: "FHIRModelsExtensions",
@@ -30,7 +35,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/apple/FHIRModels.git", from: "0.7.0"),
         .package(url: "https://github.com/antlr/antlr4.git", from: "4.13.1")
-    ],
+    ] + swiftLintPackage,
     targets: [
         .target(
             name: "FHIRModelsExtensions",
@@ -41,7 +46,8 @@ let package = Package(
             swiftSettings: [
                 .enableUpcomingFeature("ExistentialAny"),
                 .enableUpcomingFeature("InternalImportsByDefault")
-            ]
+            ],
+            plugins: [] + swiftLintPlugin
         ),
         .target(
             name: "FHIRPathParser",
@@ -50,24 +56,47 @@ let package = Package(
             ],
             exclude: [
                 "ANTLUtils"
-            ]
+            ],
+            plugins: [] + swiftLintPlugin
         ),
         .target(
             name: "FHIRQuestionnaires",
             dependencies: [
                 .product(name: "ModelsR4", package: "FHIRModels")
             ],
-            resources: [.process("Resources")]
+            resources: [.process("Resources")],
+            plugins: [] + swiftLintPlugin
         ),
         .testTarget(
             name: "FHIRModelsExtensionsTests",
             dependencies: [
                 "FHIRModelsExtensions", "FHIRQuestionnaires"
-            ]
+            ],
+            plugins: [] + swiftLintPlugin
         ),
         .testTarget(
             name: "FHIRPathParserTests",
-            dependencies: ["FHIRPathParser"]
+            dependencies: ["FHIRPathParser"],
+            plugins: [] + swiftLintPlugin
         )
     ]
 )
+
+
+// MARK: SwiftLint support
+
+var swiftLintPlugin: [Target.PluginUsage] {
+    if enableSwiftLintPlugin {
+        [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")]
+    } else {
+        []
+    }
+}
+
+var swiftLintPackage: [PackageDescription.Package.Dependency] {
+    if enableSwiftLintPlugin {
+        [.package(url: "https://github.com/SimplyDanny/SwiftLintPlugins.git", from: "0.63.2")]
+    } else {
+        []
+    }
+}
