@@ -33,7 +33,7 @@ let package = Package(
         .library(name: "FHIRQuestionnaires", targets: ["FHIRQuestionnaires"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/FHIRModels.git", .upToNextMinor(from: "0.8.0")),
+        .package(url: "https://github.com/apple/FHIRModels.git", "0.8.0"..<"0.9.0"),
         .package(url: "https://github.com/antlr/antlr4.git", from: "4.13.1")
     ] + swiftLintPackage,
     targets: [
