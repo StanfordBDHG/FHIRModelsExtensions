@@ -41,6 +41,7 @@ let package = Package(
             name: "FHIRModelsExtensions",
             dependencies: [
                 "FHIRPathParser",
+                .product(name: "FMCore", package: "FHIRModels"),
                 .product(name: "ModelsR4", package: "FHIRModels")
             ],
             swiftSettings: [

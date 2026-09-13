@@ -14,7 +14,7 @@ public enum FHIRExtensionUrls {}
 
 
 /// Type-erased version of a ``FHIRExtensionBuilder``
-public protocol FHIRExtensionBuilderProtocol<Input> {
+public protocol FHIRExtensionBuilderProtocol<Input>: Sendable {
     /// The extension builder's input type.
     associatedtype Input
     

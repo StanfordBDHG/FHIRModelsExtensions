@@ -181,6 +181,23 @@ struct FHIRExtensionBuilderTests {
     
     
     @Test
+    func extensionsOnPrimitives() throws {
+        var status: FHIRPrimitive<ObservationStatus> = FHIRPrimitive(.final)
+        #expect(status.extensions(for: Self.noteUrl).isEmpty)
+        status.appendExtension(Self.note("p"), replaceAllExistingWithSameUrl: true)
+        status.appendExtension(Self.note("q"), replaceAllExistingWithSameUrl: true)
+        #expect(status.extension == [Self.note("q")])
+        
+        var observation = Self.makeObservation()
+        observation.status = status
+        #expect(observation.status.extensions(for: Self.noteUrl) == [Self.note("q")])
+        #expect(observation.status.removeAllExtensions(withUrl: Self.noteUrl) == [Self.note("q")])
+        #expect(observation.status.extension == nil)
+        #expect(status.extension == [Self.note("q")])
+    }
+    
+    
+    @Test
     func collectionKeyPathHelpers() throws {
         var observation = Self.makeObservation()
         #expect(observation.removeFirstElement(of: \.identifier) { _ in true } == nil)
