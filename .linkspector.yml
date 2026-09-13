@@ -12,8 +12,8 @@ useGitIgnore: true
 ignorePatterns:
   - pattern: '^doc:.*$'
   - pattern: '^http://localhost.*$'
-  # Zenodo rate-limits automated requests and answers with 403 or 504, which fails the check on every run.
-  - pattern: '^https://zenodo\.org/.*$'
+  # The Zenodo badge endpoints rate-limit automated requests and answer with 403 or 504, which fails the check on every run.
+  - pattern: '^https://zenodo\.org/badge/.*$'
   # The Swift Package Index badge targets answer automated requests with 403.
   - pattern: '^https://swiftpackageindex\.com/.*$'
 replacementPatterns:
