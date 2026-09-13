@@ -35,3 +35,14 @@ jobs:
     if: ${{ github.ref_name != 'main' }}
     with:
       runsonlabels: '["macOS", "self-hosted"]'
+  generated_conformances:
+    name: Generated Conformances
+    runs-on: [macOS, self-hosted]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve dependencies
+        run: swift package resolve
+      - name: Regenerate the FHIRTypeWithExtensions conformances
+        run: python3 Scripts/generate_extension_conformances.py
+      - name: Verify the committed file is up to date
+        run: git diff --exit-code -- Sources/FHIRModelsExtensions/FHIRTypeWithExtensions+Conformances.swift

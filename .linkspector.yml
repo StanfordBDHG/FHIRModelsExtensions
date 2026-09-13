@@ -1,0 +1,23 @@
+#
+# This source file is part of the Stanford Spezi open source project
+#
+# SPDX-FileCopyrightText: 2026 Stanford University and the project authors (see CONTRIBUTORS.md)
+#
+# SPDX-License-Identifier: MIT
+#
+
+dirs:
+  - .
+useGitIgnore: true
+ignorePatterns:
+  - pattern: '^doc:.*$'
+  - pattern: '^http://localhost.*$'
+  # The Zenodo badge endpoints rate-limit automated requests and answer with 403 or 504, which fails the check on every run.
+  - pattern: '^https://zenodo\.org/badge/.*$'
+  # The Swift Package Index badge targets answer automated requests with 403.
+  - pattern: '^https://swiftpackageindex\.com/.*$'
+replacementPatterns:
+  - pattern: '(.*)#gh-dark-mode-only'
+    replacement: '$1'
+  - pattern: '(.*)#gh-light-mode-only'
+    replacement: '$1'
