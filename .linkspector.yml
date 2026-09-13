@@ -14,6 +14,8 @@ ignorePatterns:
   - pattern: '^http://localhost.*$'
   # Zenodo rate-limits automated requests and answers with 403 or 504, which fails the check on every run.
   - pattern: '^https://zenodo\.org/.*$'
+  # The Swift Package Index badge targets answer automated requests with 403.
+  - pattern: '^https://swiftpackageindex\.com/.*$'
 replacementPatterns:
   - pattern: '(.*)#gh-dark-mode-only'
     replacement: '$1'
