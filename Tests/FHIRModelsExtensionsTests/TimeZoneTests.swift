@@ -12,7 +12,6 @@ import ModelsR4
 import Testing
 
 
-@MainActor // to work around https://github.com/apple/FHIRModels/issues/36
 struct TimeZoneTests {
     /// Tests creating a `Period` instance using different time zones for start and end date.
     @Test

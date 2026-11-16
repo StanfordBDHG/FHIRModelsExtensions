@@ -14,6 +14,8 @@ Reusable utilies when working with the [apple/FHIRModels](https://github.com/app
 
 > Note: The name here might be a bit misleading; this package both extends the FHIR types, and also provides facilitis for working with [FHIR Extensions](https://build.fhir.org/extensibility.html).
 
+Every FHIR type that carries extensions conforms to ``FHIRTypeWithExtensions``. Since FHIRModels 0.9 the model types are structs, so all helpers that modify a resource are `mutating` and extension builders receive their target `inout`.
+
 
 ## Topics
 
