@@ -94,17 +94,21 @@ struct FHIRExtensionBuilderTests {
         
         var observation = Self.makeObservation()
         try observation.setEffective(startDate: startDate, endDate: startDate, timeZone: timeZone)
-        #expect(observation.effective == .dateTime(FHIRPrimitive(try DateTime(date: startDate, timeZone: timeZone))))
-        
+        let pdt = try #require(TimeZone(secondsFromGMT: -7 * 3600))
+        #expect(observation.effective == .dateTime(FHIRPrimitive(try DateTime(date: startDate, timeZone: pdt))))
+
         try observation.setEffective(startDate: startDate, endDate: endDate, timeZone: timeZone)
         #expect(observation.effective == .period(Period(
-            end: FHIRPrimitive(try DateTime(date: endDate, timeZone: timeZone)),
-            start: FHIRPrimitive(try DateTime(date: startDate, timeZone: timeZone))
+            end: FHIRPrimitive(try DateTime(date: endDate, timeZone: pdt)),
+            start: FHIRPrimitive(try DateTime(date: startDate, timeZone: pdt))
         )))
-        
+
         #expect(observation.issued == nil)
+        try observation.setIssued(on: endDate, timeZone: timeZone)
+        #expect(observation.issued == FHIRPrimitive(try Instant(date: endDate, timeZone: pdt)))
+
         try observation.setIssued(on: endDate)
-        #expect(observation.issued == FHIRPrimitive(try Instant(date: endDate)))
+        #expect(observation.issued == FHIRPrimitive(try Instant(date: endDate, timeZone: TimeZone.current.fixedOffset(at: endDate))))
     }
     
     
